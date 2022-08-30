@@ -1,0 +1,11 @@
+code: et-list-conf
+titles:
+  en: List of Contents
+  it: Lista dei contenuti
+group: free
+customUiPath: et-list-widget.ftl
+configUi:
+  customElement: list-content-widget-config # CHANGE-IT The name of the custom-element used to render the configUI
+  resources: # CHANGE-IT the file containing the config screen built artefacts
+    - entando-strapi-widgets/static/js/react-lcw-config-0.0.0.js
+    - entando-strapi-widgets/static/css/main.b445ec8a.css
