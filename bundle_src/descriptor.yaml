@@ -1,5 +1,5 @@
 code: entando-strapi-widgets
-description: single List and Template widgets
+description: Entando Strapi Widgets(Single, List & Template)
 components:
   plugins:
     - plugins/entando-template-ms-plugin.yaml
