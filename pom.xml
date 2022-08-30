@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.entando</groupId>
-    <artifactId>entando-strapi-widgets</artifactId>
+    <artifactId>entando-strapi-template-plugin</artifactId>
     <version>0.0.1</version>
     <description>Template for an ent compatible project</description>
     <properties>
