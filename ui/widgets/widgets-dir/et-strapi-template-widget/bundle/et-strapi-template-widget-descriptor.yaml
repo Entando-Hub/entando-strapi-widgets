@@ -1,0 +1,6 @@
+code: et-strapi-template-app
+titles:
+  en: Content Template
+  it: Modello di contenuto
+group: free
+customUiPath: et-strapi-template-widget.ftl

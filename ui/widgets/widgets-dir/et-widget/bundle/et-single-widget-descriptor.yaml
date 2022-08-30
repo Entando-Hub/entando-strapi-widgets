@@ -1,0 +1,11 @@
+code: et-single-conf
+titles:
+  en: Single Content
+  it: Contenuto unico
+group: free
+customUiPath: et-single-widget.ftl
+configUi:
+  customElement: single-content-widget-config # CHANGE-IT The name of the custom-element used to render the configUI
+  resources: # CHANGE-IT the file containing the config screen built artefacts
+    - entando-strapi-widgets/static/js/react-scw-config-0.0.1.js
+    - entando-strapi-widgets/static/css/main.2b073cb4.css
