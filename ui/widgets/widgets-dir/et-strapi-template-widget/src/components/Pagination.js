@@ -22,8 +22,6 @@ export default class Pagination extends Component {
 
     firstPageHandler = () => {
         this.setState({ startingItem: 1, endingItem: this.state.numberOfItemsPerPage, currentPage: 1 }, () => {
-            // todo api call
-            console.log("page pageSize", this.state.currentPage, this.state.numberOfItemsPerPage);
         });
     }
 
@@ -34,9 +32,6 @@ export default class Pagination extends Component {
                 this.state.currentPage === this.state.numberOfPages ?
                     this.setState({ endingItem: this.state.currentPage * this.state.numberOfItemsPerPage - this.state.numberOfItemsPerPage }) :
                     this.setState({ endingItem: this.state.currentPage * this.state.numberOfItemsPerPage })
-                // todo api call
-                console.log("page pageSize", this.state.currentPage, this.state.numberOfItemsPerPage);
-
             })
         }
     }
@@ -48,7 +43,6 @@ export default class Pagination extends Component {
             currentPage: this.state.numberOfPages
         }, () => {
             // todo api call
-            console.log("page pageSize", this.state.currentPage, this.state.numberOfItemsPerPage);
         });
     }
 
@@ -59,7 +53,6 @@ export default class Pagination extends Component {
                     this.setState({ endingItem: this.state.totalItem }) :
                     this.setState({ endingItem: this.state.currentPage * this.state.numberOfItemsPerPage });
                 // todo api call
-                console.log("page pageSize", this.state.currentPage, this.state.numberOfItemsPerPage);
             });
             this.setState({ startingItem: this.state.currentPage * this.state.numberOfItemsPerPage + 1 });
 

@@ -74,6 +74,93 @@
     line-height: 57.6px;
 }
 
+/* style ContentTemplateForm.js */
+.tw-ctf-heading {
+    margin: auto;
+}
+
+.tw-ctf-container-fluid-margin {
+    margin-top: 2vw;
+}
+
+.tw-ctf-formContainer-margin {
+    margin-bottom: 2em;
+}
+
+.tw-ctf-save-btn {
+    margin-left: 1vw;
+}
+
+.tw-ctf-legend {
+    font-size: 12px;
+    color: #d1d1d1;
+}
+
+.tw-ctf-inlineEditingAssistant-btn {
+    color: black;
+}
+
+.tw-ctf-aceEditor {
+    border-style: solid;
+    border-color: silver;
+    border-width: thin;
+}
+
+/* style TemplateDataTable.js */
+
+.word-break {
+    word-break: break-word;
+}
+
+/* style TemplateSearch.js */
+
+.search-label-size {
+    font-size: large;
+    font-weight: 500;
+}
+
+.tw-type-label {
+    font-size: larger;
+    font-weight: 600;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.ml-5 {
+    margin-left: 5rem;
+}
+
+.tw-search {
+    height: 100%;
+    margin-left: 2rem;
+}
+
+.tw-search-box-height {
+    height: 3.2rem;
+}
+
+.well-height {
+    height: 15rem;
+}
+
+.well-container-position {
+    position: relative;
+    z-index: "0";
+}
+
+.ignore_height {
+    height: 4% !important
+}
+
+.content-view-pf-pagination .form-group {
+    align-items: normal !important;
+}
+
+.olCustomList {
+    list-style: auto !important;
+    padding: 1.8rem !important;
+}
 /* STYLE ContentTemplateForm.js START */
 
 .container-fluid-margin {
@@ -109,53 +196,9 @@
 
 /* STYLE ContentTemplateForm.js END */
 
-/* STYLE TemplateDataTable.js START */
-
-.deleteMsg-h1 {
-    word-break: break-word;
-}
-
-/* STYLE TemplateDataTable.js END */
-
 /* STYLE TemplateSearch.js START */
-
-.search-btn-main {
-    margin-top: 1rem;
-}
-
-.search-label {
-    font-size: large;
-    font-weight: 500;
-}
-
-.type-label {
-    font-size: larger;
-    font-weight: 600;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%)
-}
-
-.search-btn-col-lg-4 {
-    margin-left: 5rem;
-}
-
 .search-select {
     height: 100%;
     margin-left: 2rem;
 }
-
-.search-show-grid-row {
-    height: 3.2rem;
-}
-
-.search-well {
-    height: 15rem;
-}
-
-.search-container {
-    position: relative;
-    z-index: "0";
-}
-
 /* STYLE TemplateSearch.js END */

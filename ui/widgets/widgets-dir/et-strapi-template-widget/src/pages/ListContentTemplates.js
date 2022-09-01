@@ -18,7 +18,7 @@ export default class ListContentTemplates extends Component {
 
     render() {
         return (
-            <div className={"mv-2"}>
+            <div className="mv-2">
                 <TemplateSearch loadingState={this.state.loading} setLoading={this.setLoading} collectionTypeOnChange={this.collectionTypeOnChange} />
                 <TemplateDataTable loadingState={this.state.loading} setLoading={this.setLoading} addNotification={this.props.addNotification} selectedCollectionType={this.state.selectedCollectionType} />
             </div>

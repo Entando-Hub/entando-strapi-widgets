@@ -2,7 +2,8 @@
  * Pagination ********
  *********************/
  import { FormattedMessage } from "react-intl";
-export const PERPAGEOPTIONS = [5, 10, 15, 25, 50];
+export const PERPAGEOPTIONS = [5, 10];
+// export const PERPAGEOPTIONS = [5, 10, 15, 25, 50];
 export const PAGE= 1;
 export const PAGESIZE= 5;
 export const TOTALITEMS= 20;

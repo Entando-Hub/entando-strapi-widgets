@@ -162,7 +162,8 @@ class TemplateDataTable extends Component {
                             </Link>
                         </div>
                         <div className="col-lg-12">
-                            <table className="table dataTable table-striped table-bordered table-hover">
+                            {/* <table className="table dataTable table-striped table-bordered table-hover"> */}
+                            <table className="table table-striped table-bordered table-hover" style={{ marginBottom: "0px" }}>
                                 <thead>
                                     <tr>
                                         <th width="45%"><FormattedMessage id="app.name" /></th>
@@ -180,7 +181,7 @@ class TemplateDataTable extends Component {
                                                 <td>{el.id}</td>
                                                 <td>
                                                     <DropdownKebab
-                                                        className=""
+                                                        // className="mykebabmenu"
                                                         // componentClass={function noRefCheck() { }}
                                                         id={el.id}
                                                         pullRight={true}
@@ -240,7 +241,7 @@ class TemplateDataTable extends Component {
                                 <div className="exclamation_icon">
                                     <span aria-hidden="true" className="fa fa-exclamation"></span>
                                 </div>
-                                <h2><FormattedMessage id="app.delete" /> <b className="deleteMsg-h1"> {this.state.selectedTempate && this.state.selectedTempate.templateName && this.state.selectedTempate.templateName} </b></h2>
+                                <h2><FormattedMessage id="app.delete" /> <b className="word-break"> {this.state.selectedTempate && this.state.selectedTempate.templateName && this.state.selectedTempate.templateName} </b></h2>
                                 <h3> {DEL_TEMPLATE_CONFIRM_MSG} </h3>
                             </span>
                         </div>

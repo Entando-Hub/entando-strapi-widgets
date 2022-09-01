@@ -31,7 +31,7 @@ export default {
     'app.nameRequired': 'Name Required',
     'app.editorCodingRequired':'Editor Coding Required ',
     'app.typeRequired':'Type required',
-    'app.itIsAMandatoryField':'.It is a mandatory field',
+    'app.itIsAMandatoryField':'It is a mandatory field',
     'app.mustBe50CharactersOrLess':'Must be 50 characters or less ',
     'app.noTemplateFound.':'No template found.',
     'app.templateCreatedSuccessfully':'Template created successfully',

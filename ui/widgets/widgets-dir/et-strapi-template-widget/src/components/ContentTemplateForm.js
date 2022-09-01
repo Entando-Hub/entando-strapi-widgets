@@ -20,7 +20,6 @@ import ModalUI from './ModalUI';
 import { FieldLevelHelp } from 'patternfly-react';
 import { FormattedMessage, injectIntl } from "react-intl";
 import { Spinner } from 'patternfly-react/dist/js/components/Spinner';
-
 const langTools = ace.acequire('ace/ext/language_tools');
 const tokenUtils = ace.acequire('ace/autocomplete/util');
 const { textCompleter, keyWordCompleter, snippetCompleter } = langTools;
@@ -174,7 +173,6 @@ class ContentTemplateForm extends Component {
             "templateName": this.state.name ? this.state.name : '',
             "templateApiId": filterUidByContentTypeLabel.uid.split('.')[filterUidByContentTypeLabel.uid.split('.').length - 1],
             "contentShape": this.state.editorCoding,
-            // TODO: require clear
             "code": "News7777",
             "styleSheet": this.state.styleSheet,
         }
@@ -565,7 +563,7 @@ class ContentTemplateForm extends Component {
                                 placeholder={this.props.intl.formatMessage({ id: "app.choose" })}
                                 emptyLabel={this.props.intl.formatMessage({ id: "app.noMatchesFound" })}
                                 selected={this.state.selectedContentType}
-                                className={this.state.errorObj.type.message && 'has-error'}
+                                className={`ignore_height ${this.state.errorObj.type.message && 'has-error'}` }
                                 onBlur={() => this.onBlurHandler(ELE_TYPE.TYPE)}
                                 disabled={this.state.formType === EDIT_LABEL}
                             />
@@ -741,8 +739,8 @@ class ContentTemplateForm extends Component {
 
                 <ModalUI modalShow={this.state.modalShow} modalHide={this.modalHide} title={<FormattedMessage id="app.inlineEditingAssistan" />} cancelButtonLabel={CLOSE_LABEL}>
                     <span>
-                        <FormattedMessage id="app.providesAnExampleOnHowToActivate" /> <strong>style sheet INLINE EDITING </strong><FormattedMessage id="app.forEntandolabels" /> <br /><br />
-                        <ol>
+                        <FormattedMessage id="app.providesAnExampleOnHowToActivate" /> <strong>INLINE EDITING </strong><FormattedMessage id="app.forEntandolabels" /> <br /><br />
+                        <ol className="olCustomList">
                             <li><FormattedMessage id="app.openA" /> <strong>TAG </strong> <FormattedMessage id="app.likeDivPSpan" /></li>
                             <li><FormattedMessage id="app.addTheClass" />  <strong>' editContent '</strong><FormattedMessage id="app.toTheTAGKeepInMindThat" />  <strong>'editContentText'</strong> <FormattedMessage id="app.classCanBeUsedInCaseOfATextArea" />  </li>
                             <li><FormattedMessage id="app.thenAdd" />  <strong>data-content-id="$content.getId()"</strong> </li>
