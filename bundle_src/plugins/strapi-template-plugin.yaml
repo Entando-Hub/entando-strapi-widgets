@@ -1,0 +1,6 @@
+image: entando/entando-strapi-template-plugin:0.0.3
+dbms: none
+ingressPath: "/entando-template-api"
+healthCheckPath: "/actuator/health"
+roles:
+  - "admin"

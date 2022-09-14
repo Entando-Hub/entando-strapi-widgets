@@ -1,9 +1,9 @@
-code: entando-strapi-widgets
-description: Entando Strapi Widgets(Single, List & Template)
+code: entando-strapi-widget-bundle
+description: Entando Strapi widget bundle
 components:
   plugins:
-    - plugins/entando-template-ms-plugin.yaml
+    - plugins/strapi-template-plugin.yaml
   widgets:
-    - ui/widgets/widgets-dir/et-strapi-template-widget/et-strapi-template-widget-descriptor.yaml
-    - ui/widgets/widgets-dir/et-widget/et-single-widget-descriptor.yaml
-    - ui/widgets/widgets-dir/et-widget-list/et-list-widget-descriptor.yaml
+    - ui/widgets/widgets-dir/strapi-content-template-widget-app/strapi-widgets-bundle-descriptor.yaml
+    - ui/widgets/widgets-dir/strapi-content-widget-app/strapi-widgets-bundle-descriptor.yaml
+    - ui/widgets/widgets-dir/strapi-content-list-widget-app/strapi-widgets-bundle-descriptor.yaml

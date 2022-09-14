@@ -29,7 +29,7 @@ import com.entando.template.exception.TemplateNotFoundException;
 import com.entando.template.persistence.entity.EntTemplate;
 import com.entando.template.request.TemplateRequestView;
 import com.entando.template.response.TemplateResponseView;
-import com.entando.template.service.EntTamplateService;
+import com.entando.template.service.EntTemplateService;
 import com.entando.template.util.PagedContent;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +47,7 @@ public class EntTemplateController {
 	private final Logger logger = LoggerFactory.getLogger(EntTemplateController.class);
 
 	@Autowired
-	private EntTamplateService entTamplateService;
+	private EntTemplateService entTamplateService;
 
 	@Operation(summary = "Get all the templates", description = "Public api, no authentication required.")
 	@GetMapping("/")
