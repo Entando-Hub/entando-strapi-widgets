@@ -47,23 +47,23 @@ public class EntTemplateController {
 	private final Logger logger = LoggerFactory.getLogger(EntTemplateController.class);
 
 	@Autowired
-	private EntTemplateService entTamplateService;
+	private EntTemplateService entTemplateService;
 
-	@Operation(summary = "Get all the templates", description = "Public api, no authentication required.")
+	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
 	@GetMapping("/")
 	@CrossOrigin
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	public List<TemplateResponseView> getTemplates(@RequestParam(required = false) String collectionType) {
 		if(Optional.ofNullable(collectionType).isPresent()) {
 			logger.debug("REST request to get templates by collectionType");
-			return entTamplateService.getTemplatesByCollectionType(collectionType).stream().map(TemplateResponseView::new).collect(Collectors.toList());
+			return entTemplateService.getTemplatesByCollectionType(collectionType).stream().map(TemplateResponseView::new).collect(Collectors.toList());
 		}else {
 			logger.debug("REST request to get templates");
-			return entTamplateService.getTemplates().stream().map(TemplateResponseView::new).collect(Collectors.toList());
+			return entTemplateService.getTemplates().stream().map(TemplateResponseView::new).collect(Collectors.toList());
 		}
 	}
 
-	@Operation(summary = "Get all the templates", description = "Public api, no authentication required.")
+	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
 	@GetMapping("/paged")
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	public PagedContent<TemplateResponseView, EntTemplate> getFilteredTemplates(
@@ -72,18 +72,18 @@ public class EntTemplateController {
 		Integer sanitizedPageNum = page >= 1 ? page - 1 : 0;
 		String sanitizedTemplateApiId = StringUtils.isEmpty(templateApiId) ? ApplicationConstants.TEMPLATE_SEARCH_PARAM_ALL : templateApiId.trim();
 
-		PagedContent<TemplateResponseView, EntTemplate> pagedContent = entTamplateService
+		PagedContent<TemplateResponseView, EntTemplate> pagedContent = entTemplateService
 				.getFilteredTemplates(sanitizedPageNum, pageSize, sanitizedTemplateApiId);
 		return pagedContent;
 	}
 
-	@Operation(summary = "Get the template details by id", description = "Public api, no authentication required.")
+	@Operation(summary = "Get the template details by id", description = "Private api, authentication required.")
 	@GetMapping("/{templateId}")
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	@CrossOrigin
 	public ResponseEntity<TemplateResponseView> getTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to get EntTemplate Id: {}", templateId);
-		Optional<EntTemplate> entTemplateOptional = entTamplateService.getTemplate(templateId);
+		Optional<EntTemplate> entTemplateOptional = entTemplateService.getTemplate(templateId);
 		if (entTemplateOptional.isPresent()) {
 			return new ResponseEntity<>(entTemplateOptional.map(TemplateResponseView::new).get(), HttpStatus.OK);
 		} else {
@@ -92,31 +92,31 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Create a new template", description = "Public api, no authentication required.")
+	@Operation(summary = "Create a new template", description = "Private api, authentication required.")
 	@PostMapping("/")
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	public ResponseEntity<TemplateResponseView> createEntTemplate(@Valid @RequestBody TemplateRequestView templateReqView) {
 		logger.debug("REST request to create EntTemplate: {}", templateReqView);
 		try {
-			EntTemplate entity = entTamplateService.createTemplate(templateReqView.createEntity(templateReqView, null));
+			EntTemplate entity = entTemplateService.createTemplate(templateReqView.createEntity(templateReqView, null));
 			return new ResponseEntity<>(new TemplateResponseView(entity), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
 
-	@Operation(summary = "Update a template", description = "Public api, no authentication required.")
+	@Operation(summary = "Update a template", description = "Private api, authentication required.")
 	@PutMapping("/{templateId}")
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	public ResponseEntity<TemplateResponseView> updateTemplate(@Valid @RequestBody TemplateRequestView reqView, @PathVariable Long templateId) {
 		logger.debug("REST request to update EntTemplate {}: {}", templateId);
 		try {
-			Optional<EntTemplate> templateOptional = entTamplateService.getTemplate(templateId);
+			Optional<EntTemplate> templateOptional = entTemplateService.getTemplate(templateId);
 			if (!templateOptional.isPresent()) {
 				logger.warn("Template '{}' does not exists", templateId);
 				throw new TemplateNotFoundException(String.format(ApplicationConstants.TEMPLATE_NOT_FOUND_ERR_MSG, templateId));
 			} else {
-				EntTemplate updatedEntity = entTamplateService.updateTemplate(templateOptional.get(), reqView);
+				EntTemplate updatedEntity = entTemplateService.updateTemplate(templateOptional.get(), reqView);
 				return new ResponseEntity<>(new TemplateResponseView(updatedEntity), HttpStatus.OK);
 			}
 		} catch (TemplateNotFoundException e) {
@@ -126,18 +126,18 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Delete a template", description = "Public api, no authentication required.")
+	@Operation(summary = "Delete a template", description = "Private api, authentication required.")
 	@DeleteMapping("/{templateId}")
 	@RolesAllowed({ ApplicationConstants.ADMIN })
 	public ResponseEntity<String> deleteEntTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to delete template {}", templateId);
 		try {
-			Optional<EntTemplate> entTemplateOptional = entTamplateService.getTemplate(templateId);
+			Optional<EntTemplate> entTemplateOptional = entTemplateService.getTemplate(templateId);
 			if (!entTemplateOptional.isPresent()) {
 				logger.warn("Requested template '{}' does not exists", templateId);
 				throw new TemplateNotFoundException(String.format(ApplicationConstants.TEMPLATE_NOT_FOUND_ERR_MSG, templateId));
 			}
-			entTamplateService.deleteTemplate(templateId);
+			entTemplateService.deleteTemplate(templateId);
 			return new ResponseEntity<>(ApplicationConstants.TEMPLATE_DELETED_MSG, HttpStatus.OK);
 		} catch (TemplateNotFoundException e) {
 			throw new TemplateNotFoundException(e.getMessage());

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.entando</groupId>
     <artifactId>entando-strapi-template-plugin</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <description>Template for an ent compatible project</description>
     <properties>
         <problem-spring-web.version>0.25.0</problem-spring-web.version>
