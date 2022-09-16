@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-
-import {  FormattedMessage } from "react-intl";
-import {
-    Row,
-    Col,
-    Button
-} from 'patternfly-react';
+import { FormattedMessage } from "react-intl";
+import { Row, Col, Button } from 'patternfly-react';
 import { SimpleTable } from '../ui/SimpleTable';
 import { fetchStrapiBaseUrl, getCollectionTypes, getContentById, getTemplate } from '../api/Api';
 import { Link } from 'react-router-dom';
@@ -17,8 +12,6 @@ export default class Config extends Component {
         super(props);
         this.state = {
             selectedContent: [],
-            name: null,
-            nameTwo: null,
             collectionTypes: [],
             selectedContentId: 0,
             selectedTemplateId: 'default',

@@ -1,0 +1,11 @@
+code: strapi-content-list-bundle
+titles:
+  en: Strapi Content List Widget
+  it: Widget Elenco contenuti Strapi
+group: free
+customUiPath: strapi-content-list-widget.ftl
+configUi:
+  customElement: strapi-content-list-config-widget-app # CHANGE-IT The name of the custom-element used to render the configUI
+  resources: # CHANGE-IT the file containing the config screen built artefacts
+    - entando-strapi-widget-bundle/static/js/react-lcw-config-0.0.0.js
+    - entando-strapi-widget-bundle/static/css/main.b445ec8a.css

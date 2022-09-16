@@ -5,17 +5,15 @@ import './app.css';
 import { STRAPI_BASE_URL_KEY } from './helper/Constant';
 import StrapiConfigWarning from './page/StrapiConfigWarning';
 
-function App({ name, templateId, contentId }) {
+function App({​​​​​​ contentName, templateId, contentId }​​​​​​) {
     const [templateData, setTemplateData] = useState(null);
     const [contentData, setContentData] = useState(null);
     const [htmlCode, setHtmlCode] = useState(null);
 
     useEffect(async () => {
-        // const getTemplate = await getTemplateById(54);
         const getTemplate = await getTemplateById(templateId);
-        const getContent = await getContentById(name, contentId);
-        const domain =  await fetchStrapiBaseUrl();
-        // const getContent = await getContentById('banner', 1);
+        const getContent = await getContentById(contentName, contentId);
+        const domain = await fetchStrapiBaseUrl();
         setTemplateData(getTemplate);
         setContentData(getContent)
 

@@ -5,8 +5,6 @@ import { checkIfUrlExists, getStrapiConfigurations } from "../api/Api";
 import { STRAPI_BASE_URL_KEY } from "../helper/Constant";
 
 const ATTRIBUTES = {
-    name: 'name',
-    nameTwo: 'nameTwo',
     selectedTemplateId: 'selectedTemplateId',
     selectedContentId: 'selectedContentId',
     selectedContentName: 'selectedContentName',
@@ -33,13 +31,11 @@ class SingleWidgetElement extends HTMLElement {
     }
 
     render() {
-        const name = this.getAttribute(ATTRIBUTES.name);
-        const nameTwo = this.getAttribute(ATTRIBUTES.nameTwo);
         const templateId = this.getAttribute(ATTRIBUTES.selectedTemplateId);
         const contentId = this.getAttribute(ATTRIBUTES.selectedContentId);
         const contentName = this.getAttribute(ATTRIBUTES.selectedContentName);
         ReactDOM.render(
-            <App name={name} nameTwo={nameTwo} templateId={templateId} contentId={contentId} contentName={contentName} />,
+            <App templateId={templateId} contentId={contentId} contentName={contentName} />,
             this.mountPoint
         );
     }

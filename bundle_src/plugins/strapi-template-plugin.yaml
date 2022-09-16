@@ -1,4 +1,4 @@
-image: entando/entando-strapi-template-plugin:0.0.4
+image: entando/entando-strapi-template:1.0.0
 dbms: none
 ingressPath: "/entando-template-api"
 healthCheckPath: "/actuator/health"
