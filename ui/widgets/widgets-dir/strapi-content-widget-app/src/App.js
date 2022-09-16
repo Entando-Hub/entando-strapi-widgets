@@ -5,7 +5,7 @@ import './app.css';
 import { STRAPI_BASE_URL_KEY } from './helper/Constant';
 import StrapiConfigWarning from './page/StrapiConfigWarning';
 
-function App({​​​​​​ contentName, templateId, contentId }​​​​​​) {
+function App({ contentName, templateId, contentId }) {
     const [templateData, setTemplateData] = useState(null);
     const [contentData, setContentData] = useState(null);
     const [htmlCode, setHtmlCode] = useState(null);
