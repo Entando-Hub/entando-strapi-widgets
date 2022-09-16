@@ -9,14 +9,11 @@ With this configuration, you can use the ent cli (https://dev.entando.org/next/d
 
 ### Publish the bundle.
 1. Build: `ent prj build` (build the frontend and backend) or `ent prj fe-build -a` (to just build the frontend, including changes from bundle_src)
-2. Publish: `ent prj pub` or `ent prj fe-push` (publish all or just the frontend)
+2. Build for configuration widgets: `ent prj fb` and choose config widget number
+2. Publish: `ent prj pbs-publish` (publish all)
 3. Deploy (after connecting to k8s above): `ent prj deploy`
 4. Install the bundle via 1) App Builder, 2) `ent prj install`, or 3) `ent prj install --conflict-strategy=OVERRIDE` on subsequent installs.
 5. Iterate steps 1-4 to publish new versions.
-
-# Development notes
-## Tips
-* Check for the "CHANGE-IT" placeholders
 
 ## Local testing of the project
 You can use the following commands from the application folder to run the local stack
@@ -30,6 +27,4 @@ You can use the following commands from the application folder to run the local 
 * Use client web_app when authorizing the microservices
 
 ## Notes
-* Two users are included in the keycloak realm config
-    * test-user/test-user - regular user with no role provided (receive 403 on api call)
-    * et-first-role/et-first-role - can access the api (role internal/mf-widget-admin)
+* only admin role is required to run the template service 

@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.entando</groupId>
-    <artifactId>entando-strapi-template-plugin</artifactId>
-    <version>0.0.4</version>
+    <artifactId>entando-strapi-template</artifactId>
+    <version>0.0.1</version>
     <description>Template for an ent compatible project</description>
     <properties>
         <problem-spring-web.version>0.25.0</problem-spring-web.version>
