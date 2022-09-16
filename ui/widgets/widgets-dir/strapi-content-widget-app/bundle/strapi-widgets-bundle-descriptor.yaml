@@ -1,0 +1,11 @@
+code: strapi-content-bundle
+titles:
+  en: Strapi Content Widget
+  it: Widget di contenuti di Strapi
+group: free
+customUiPath: strapi-content-widget.ftl
+configUi:
+  customElement: strapi-content-config-widget-app # CHANGE-IT The name of the custom-element used to render the configUI
+  resources: # CHANGE-IT the file containing the config screen built artefacts
+    - entando-strapi-widget-bundle/static/js/react-scw-config-0.0.1.js
+    - entando-strapi-widget-bundle/static/css/main.2b073cb4.css
