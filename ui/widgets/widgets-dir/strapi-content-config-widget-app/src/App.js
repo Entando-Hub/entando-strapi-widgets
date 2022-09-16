@@ -10,7 +10,6 @@ import Config from './page/Config';
 import SingleContentList from './page/SingleContentList';
 import StrapiConfigWarning from './page/StrapiConfigWarning.js';
 
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -18,8 +17,6 @@ class App extends Component {
             selectedContentId: 0,
             selectedTemplateId: 'default',
             selectedContentName: null,
-            name: '',
-            nameTwo: 'nameTwoVar',
             collectionType: '',
             locale:'en',
             strapiConfLoaded: false
@@ -61,7 +58,7 @@ class App extends Component {
     }
 
     setSelectedContentName = (contentName) => {
-        this.setState({ selectedContentName: contentName, name: contentName, nameTwo: contentName })
+        this.setState({ selectedContentName: contentName })
     }
 
     setTemplateId = (tempId) => {
