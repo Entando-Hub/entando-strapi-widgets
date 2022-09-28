@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.entando</groupId>
     <artifactId>entando-strapi-template</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>Template for an ent compatible project</description>
     <properties>
         <problem-spring-web.version>0.25.0</problem-spring-web.version>
@@ -149,28 +149,4 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
 </project>

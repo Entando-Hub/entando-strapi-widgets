@@ -33,15 +33,14 @@ app:
     realm: ${keycloak.realm}
     client-ui: public
 
-# spring:
-#   datasource:
-#     # Enable this section for postgresql
-#     driver-class-name: org.postgresql.Driver
-#     url: jdbc:postgresql://localhost:5432/strapi_template_db
-#     username: postgres
-#     password: postgres
-#   jpa:
-#     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#     database: POSTGRESQL
-#     hibernate:
-#       ddl-auto: update 
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/strapi-template-db
+    username: strapi-user
+    password: strapi-password
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update 
