@@ -30,15 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), ex.getClass().getCanonicalName(), details);
         return new ResponseEntity<Object>(error, HttpStatus.NOT_FOUND);
     }
-
-	@ExceptionHandler(Exception.class)
-    public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-        List<String> details = new ArrayList<>();
-        details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), ex.getClass().getCanonicalName(), details);
-        return new ResponseEntity<Object>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
+	
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
