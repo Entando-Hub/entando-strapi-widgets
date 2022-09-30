@@ -52,7 +52,7 @@ public class EntTemplateController {
 	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
 	@GetMapping("/")
 	@CrossOrigin
-	@RolesAllowed({ ApplicationConstants.ADMIN })
+	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public List<TemplateResponseView> getTemplates(@RequestParam(required = false) String collectionType) {
 		if(Optional.ofNullable(collectionType).isPresent()) {
 			logger.debug("REST request to get templates by collectionType");
@@ -65,7 +65,7 @@ public class EntTemplateController {
 
 	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
 	@GetMapping("/paged")
-	@RolesAllowed({ ApplicationConstants.ADMIN })
+	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public PagedContent<TemplateResponseView, EntTemplate> getFilteredTemplates(
 			@RequestParam Integer page, @RequestParam Integer pageSize, @RequestParam(required = false) String templateApiId) {
 		logger.debug("REST request to get paginated templates");
@@ -79,7 +79,6 @@ public class EntTemplateController {
 
 	@Operation(summary = "Get the template details by id", description = "Private api, authentication required.")
 	@GetMapping("/{templateId}")
-	@RolesAllowed({ ApplicationConstants.ADMIN })
 	@CrossOrigin
 	public ResponseEntity<TemplateResponseView> getTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to get EntTemplate Id: {}", templateId);
@@ -94,7 +93,7 @@ public class EntTemplateController {
 
 	@Operation(summary = "Create a new template", description = "Private api, authentication required.")
 	@PostMapping("/")
-	@RolesAllowed({ ApplicationConstants.ADMIN })
+	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<TemplateResponseView> createEntTemplate(@Valid @RequestBody TemplateRequestView templateReqView) {
 		logger.debug("REST request to create EntTemplate: {}", templateReqView);
 		try {
@@ -107,7 +106,7 @@ public class EntTemplateController {
 
 	@Operation(summary = "Update a template", description = "Private api, authentication required.")
 	@PutMapping("/{templateId}")
-	@RolesAllowed({ ApplicationConstants.ADMIN })
+	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<TemplateResponseView> updateTemplate(@Valid @RequestBody TemplateRequestView reqView, @PathVariable Long templateId) {
 		logger.debug("REST request to update EntTemplate {}: {}", templateId);
 		try {
@@ -128,7 +127,7 @@ public class EntTemplateController {
 
 	@Operation(summary = "Delete a template", description = "Private api, authentication required.")
 	@DeleteMapping("/{templateId}")
-	@RolesAllowed({ ApplicationConstants.ADMIN })
+	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<String> deleteEntTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to delete template {}", templateId);
 		try {

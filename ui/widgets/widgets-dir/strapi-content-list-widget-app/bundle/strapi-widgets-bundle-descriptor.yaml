@@ -1,7 +1,7 @@
 code: strapi-content-list-bundle
 titles:
-  en: Strapi Content List Widget
-  it: Widget Elenco contenuti Strapi
+  en: Strapi Content List
+  it: Elenco contenuti Strapi
 group: free
 customUiPath: strapi-content-list-widget.ftl
 configUi:
