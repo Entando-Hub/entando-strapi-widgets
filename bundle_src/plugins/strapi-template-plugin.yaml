@@ -3,4 +3,4 @@ dbms: postgresql
 ingressPath: "/entando-template-api"
 healthCheckPath: "/actuator/health"
 roles:
-  - "admin"
+  - "strapi-user"
