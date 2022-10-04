@@ -1,7 +1,7 @@
 export default {
     'app.name':'Nome',
     'app.search':'Ricerca',
-    'app.type':'Tipa',
+    'app.type':'Tipo di contenuto',
     'app.all':'Tutte',
     'app.id':'Id',
     'app.actions':'Azioni',
