@@ -6,6 +6,8 @@ import { STRAPI_BASE_URL_KEY } from "../helper/Constant";
 
 const ATTRIBUTES = {
     contentName: "contentName",
+    contentPluralName: "contentPluralName",
+    contentKind: "contentKind",
     contentIdsAndTemplateIds: "contentIdsAndTemplateIds",
     saveQueryDetails: "saveQueryDetails",
     colLabelName: "colLabelName"
@@ -33,6 +35,8 @@ class WidgetElement extends HTMLElement {
 
     render() {
         const contentName = this.getAttribute(ATTRIBUTES.contentName);
+        const contentPluralName = this.getAttribute(ATTRIBUTES.contentPluralName);
+        const contentKind = this.getAttribute(ATTRIBUTES.contentKind);
         const contentIdsAndTemplateIds = this.getAttribute(ATTRIBUTES.contentIdsAndTemplateIds);
         const saveQueryDetails = this.getAttribute(ATTRIBUTES.saveQueryDetails);
         const colLabelName = this.getAttribute(ATTRIBUTES.colLabelName);
@@ -40,6 +44,8 @@ class WidgetElement extends HTMLElement {
         ReactDOM.render(
             <App
                 contentName={contentName}
+                contentPluralName={contentPluralName}
+                contentKind={contentKind}
                 contentIdsAndTemplateIds={contentIdsAndTemplateIds}
                 saveQueryDetails={saveQueryDetails}
                 colLabelName={colLabelName}

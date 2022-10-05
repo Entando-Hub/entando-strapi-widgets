@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { fetchStrapiBaseUrl, filterContentByQuery, getContents, getTemplateById, getTemplates } from './api/Api';
+import { fetchStrapiBaseUrl, filterContentByQuery, getContents, getSingleTypeContent, getTemplateById, getTemplates } from './api/Api';
 import './app.css';
 import { STRAPI_BASE_URL_KEY } from './helper/Constant';
 import StrapiConfigWarning from './page/StrapiConfigWarning';
 var velocityjs = require("velocityjs");
 
-function App({ contentName, contentIdsAndTemplateIds, saveQueryDetails, colLabelName }) {
+function App({ contentName, contentPluralName, contentKind, contentIdsAndTemplateIds, saveQueryDetails, colLabelName }) {
     const [htmlCode, setHtmlCode] = useState(null);
     const [CID_TID, set_CID_TID] = useState(decodeURI(contentIdsAndTemplateIds));
 
@@ -25,7 +25,16 @@ function App({ contentName, contentIdsAndTemplateIds, saveQueryDetails, colLabel
     async function fetchMultiSelect(cid_tid_obj) {
         const domain = await fetchStrapiBaseUrl();
         const getTemplateData = await getTemplates(cid_tid_obj.map(el => el.templateId));
-        const getContentsData = await getContents(contentName, cid_tid_obj.map(el => el.contentId));
+        let getContentsData;
+        switch (contentKind) {
+            case 'collectionType':
+                getContentsData = await getContents(contentPluralName, cid_tid_obj.map(el => el.contentId));
+                break;
+            case 'singleType':
+                getContentsData = [await getSingleTypeContent(contentName)];
+                break;
+        }
+        getContentsData = getContentsData.map(el => extractAttributes(el));
         mappingOfDataWithTemplate(getTemplateData, getContentsData, cid_tid_obj, domain);
     }
 
@@ -98,6 +107,23 @@ function App({ contentName, contentIdsAndTemplateIds, saveQueryDetails, colLabel
     } else {
         return <StrapiConfigWarning />
     }
+}
+
+function extractAttributes(apiResponse) {
+    const objectToRender = {};
+    if (apiResponse.data && apiResponse.data.attributes) {
+        if (apiResponse.data.id) {
+            objectToRender.id = apiResponse.data.id;
+        }
+        const attributes = apiResponse.data.attributes;
+        Object.entries(attributes).forEach(([key, value]) => {
+            if (value && value.data && value.data.attributes) {
+                value = extractAttributes(value);
+            }
+            objectToRender[key] = value;
+        });
+    }
+    return objectToRender;
 }
 
 export default App;

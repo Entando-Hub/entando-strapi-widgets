@@ -16,6 +16,8 @@ class App extends Component {
         super(props);
         this.state = {
             selectedContentName: null,
+            selectedContentPluralName: null,
+            selectedContentKind: null,
             mappingOfContentTemplate: '',
             contentIdAndTemplateId: '',
             selectedCollectionType: null,
@@ -65,6 +67,14 @@ class App extends Component {
 
     setSelectedContentName = (contentName, contentLabel) => {
         this.setState({ selectedContentName: contentName, selectedCollectionType: contentLabel })
+    }
+
+    setSelectedContentPluralName = (contentPluralName) => {
+        this.setState({ selectedContentPluralName: contentPluralName })
+    }
+
+    setSelectedContentKind = (contentKind) => {
+        this.setState({ selectedContentKind: contentKind })
     }
 
     setQueryTerm = (searchTerm) => {
@@ -118,6 +128,8 @@ class App extends Component {
                                     <Route path='/' exact>
                                         <Config
                                             selectedContent={this.state.mappingOfContentTemplate}
+                                            selectedContentPluralName={this.state.selectedContentPluralName}
+                                            selectedContentKind={this.state.selectedContentKind}
                                             mappingOfContentTemplate={this.state.mappingOfContentTemplate}
                                             setContentTemplate={this.setContentTemplate}
                                             selectedContentLabel={this.state.selectedCollectionType}
@@ -133,6 +145,8 @@ class App extends Component {
                                         <MultiContentList
                                             setContentTemplate={this.setContentTemplate}
                                             setSelectedContentName={this.setSelectedContentName}
+                                            selectedContentPluralName={this.state.selectedContentPluralName}
+                                            selectedContentKind={this.state.selectedContentKind}
                                             setQueryTerm={this.setQueryTerm}
                                             setFieldSearchBy={this.setFieldSearchBy}
                                             searchText={this.state.searchText}
@@ -141,6 +155,8 @@ class App extends Component {
                                             colLabel={this.state.colLabel}
                                             isEditable={this.state.isEditable}
                                             selectedContentName={this.state.selectedContentName}
+                                            setSelectedContentPluralName={this.setSelectedContentPluralName}
+                                            setSelectedContentKind={this.setSelectedContentKind}
                                             contentIdAndTemplateId={this.state.contentIdAndTemplateId}
                                             SaveQueryHandler={this.SaveQueryHandler}
                                         />
