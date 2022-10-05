@@ -72,6 +72,9 @@ function App({ contentName, contentPluralName, contentKind, templateId, contentI
 function extractAttributes(apiResponse) {
     const objectToRender = {};
     if (apiResponse.data && apiResponse.data.attributes) {
+        if (apiResponse.data.id) {
+            objectToRender.id = apiResponse.data.id;
+        }
         const attributes = apiResponse.data.attributes;
         Object.entries(attributes).forEach(([key, value]) => {
             if (value && value.data && value.data.attributes) {
