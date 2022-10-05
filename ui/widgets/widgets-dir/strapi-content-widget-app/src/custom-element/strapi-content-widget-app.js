@@ -8,6 +8,8 @@ const ATTRIBUTES = {
     selectedTemplateId: 'selectedTemplateId',
     selectedContentId: 'selectedContentId',
     selectedContentName: 'selectedContentName',
+    selectedContentPluralName: 'selectedContentPluralName',
+    selectedContentKind: 'selectedContentKind'
 };
 class SingleWidgetElement extends HTMLElement {
 
@@ -34,8 +36,10 @@ class SingleWidgetElement extends HTMLElement {
         const templateId = this.getAttribute(ATTRIBUTES.selectedTemplateId);
         const contentId = this.getAttribute(ATTRIBUTES.selectedContentId);
         const contentName = this.getAttribute(ATTRIBUTES.selectedContentName);
+        const contentPluralName = this.getAttribute(ATTRIBUTES.selectedContentPluralName);
+        const contentKind = this.getAttribute(ATTRIBUTES.selectedContentKind);
         ReactDOM.render(
-            <App templateId={templateId} contentId={contentId} contentName={contentName} />,
+            <App templateId={templateId} contentId={contentId} contentName={contentName} contentPluralName={contentPluralName} contentKind={contentKind} />,
             this.mountPoint
         );
     }

@@ -17,6 +17,8 @@ class App extends Component {
             selectedContentId: 0,
             selectedTemplateId: 'default',
             selectedContentName: null,
+            selectedContentPluralName: null,
+            selectedContentKind: null,
             collectionType: '',
             locale:'en',
             strapiConfLoaded: false
@@ -59,6 +61,14 @@ class App extends Component {
 
     setSelectedContentName = (contentName) => {
         this.setState({ selectedContentName: contentName })
+    }
+
+    setSelectedContentPluralName = (contentPluralName) => {
+        this.setState({ selectedContentPluralName: contentPluralName })
+    }
+
+    setSelectedContentKind = (contentKind) => {
+        this.setState({ selectedContentKind: contentKind })
     }
 
     setTemplateId = (tempId) => {
@@ -107,6 +117,8 @@ class App extends Component {
                                 <Route path='/' exact>
                                     <Config setTemplateId={this.setTemplateId}
                                         selectedContentName={this.state.selectedContentName}
+                                        selectedContentPluralName={this.state.selectedContentPluralName}
+                                        selectedContentKind={this.state.selectedContentKind}
                                         collType={this.state.collectionType}
                                         selectedContentId={this.state.selectedContentId}
                                         selectedTemplateId={this.state.selectedTemplateId} />
@@ -115,7 +127,11 @@ class App extends Component {
                                     <SingleContentList
                                         setContent={this.setContent}
                                         selectedContentName={this.state.selectedContentName}
+                                        selectedContentPluralName={this.state.selectedContentPluralName}
+                                        selectedContentKind={this.state.selectedContentKind}
                                         setSelectedContentName={this.setSelectedContentName}
+                                        setSelectedContentPluralName={this.setSelectedContentPluralName}
+                                        setSelectedContentKind={this.setSelectedContentKind}
                                         selectedContentId={this.state.selectedContentId}
                                         setCollectionType={this.setCollectionType}
                                         collType={this.state.collectionType}

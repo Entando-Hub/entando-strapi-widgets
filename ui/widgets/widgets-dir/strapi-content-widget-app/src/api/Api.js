@@ -2,9 +2,6 @@ import axios from 'axios';
 import { STRAPI_BASE_URL_KEY } from '../helper/Constant';
 
 const apiEndPoint = `${process.env.REACT_APP_PUBLIC_API_URL}/template/searchby/`;
-const STRAPI_TOKEN = {
-    'Authorization': `Bearer ${process.env.REACT_APP_LOCAL_STRAPI_TOKEN}`
-}
 
 export const getTemplate = async (searchby = 'code', searchTerm) => {
     return await axios.get(`${apiEndPoint}${searchby}/${searchTerm}`, addAuthorizationRequestConfig({}))
@@ -22,15 +19,26 @@ export const getTemplateById = async (templateId) => {
 
 /**
  * getContentById Search Content By Id.
- * @param {*} contentType 
+ * @param {*} contentName 
  * @param {*} contentId 
  * @returns 
  */
  export const getContentById = async (contentName, contentId) => {
     if (!contentName || !contentId) console.error(contentName, contentId);
-    const url = `${await fetchStrapiBaseUrl()}/content-manager/collection-types/api::${contentName}.${contentName}/${contentId}`;
+    const url = `${await fetchStrapiBaseUrl()}/api/${contentName}/${contentId}?populate=*`;
     const { data } = await axios.get(url, addAuthorizationRequestConfig({}, 'EntKcToken'))
 
+    return data;
+}
+
+/**
+ * getSingleContent Return single type content
+ * @param {*} contentName 
+ * @returns 
+ */
+export const getSingleTypeContent = async (contentName) => {
+    const url = `${await fetchStrapiBaseUrl()}/api/${contentName}?populate=*`;
+    const { data } = await axios.get(url, addAuthorizationRequestConfig({}, 'EntKcToken'))
     return data;
 }
 
@@ -48,9 +56,11 @@ const getDefaultOptions = (defaultBearer) => {
     const token = getKeycloakToken()
     if (!token) {
         //Below if condition is to run the strapi API in local
-        if (defaultBearer === 'EntKcToken') {
+        if (defaultBearer === 'EntKcToken' && process.env.REACT_APP_LOCAL_STRAPI_TOKEN) {
             return {
-                headers: STRAPI_TOKEN,
+                headers: {
+                    'Authorization': `Bearer ${process.env.REACT_APP_LOCAL_STRAPI_TOKEN}`
+                },
             }
         } else {
             return {}

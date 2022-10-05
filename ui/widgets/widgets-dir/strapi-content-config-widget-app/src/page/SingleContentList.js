@@ -93,7 +93,7 @@ class SingleContentList extends Component {
   async setCollectionTypeState() {
     const { data: collectionTypeData } = await getCollectionTypes();
     const collectionTypeApiData = this.filterUidByApiPrefix(collectionTypeData);
-    this.setState({ collectionType: collectionTypeApiData.map(el => ({ label: el.info.displayName, value: el.info.singularName })) });
+    this.setState({ collectionType: collectionTypeApiData.map(el => ({ label: el.info.displayName, value: el.info.singularName, pluralName: el.info.pluralName, kind: el.kind })) });
   }
 
   filterUidByApiPrefix = (collectionTypeData) => {
@@ -120,8 +120,12 @@ class SingleContentList extends Component {
     if (collType && collType.value) {
       await this.getContentsByCollectionType(collType.value)
       this.props.setSelectedContentName(collType.value)
+      this.props.setSelectedContentPluralName(collType.pluralName)
+      this.props.setSelectedContentKind(collType.kind)
     } else {
       this.props.setSelectedContentName(null);
+      this.props.setSelectedContentPluralName(null);
+      this.props.setSelectedContentKind(null);
     }
     this.setState({ contentIdForModal: undefined, currPageWillUpdating: PAGE });
   }
@@ -292,7 +296,12 @@ class SingleContentList extends Component {
     this.props.setTemplateId('default');
   }
 
-  cancelHandler = () => {this.props.collType.length && this.props.setSelectedContentName(parseData(this.props.collType)[0].value)}
+  cancelHandler = () => {
+    this.props.collType.length
+      && this.props.setSelectedContentName(parseData(this.props.collType)[0].value)
+      && this.props.setSelectedContentPluralName(parseData(this.props.collType)[0].pluralName)
+      && this.props.setSelectedContentKind(parseData(this.props.collType)[0].kind)
+  }
 
   render() {
     const pagination = {
