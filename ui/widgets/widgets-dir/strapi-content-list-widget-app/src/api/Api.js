@@ -24,11 +24,12 @@ export const getTemplateById = async (templateId) => {
  * @returns
  */
 export const getTemplates = async (templateIds) => {
-    const { data: templateData } = await axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/template/`, addAuthorizationRequestConfig({}));
-    const filtered = templateData.filter(temp => {
-        return templateIds.indexOf(temp.id + "") > -1
+    const templateSet = new Set(templateIds);
+    const apiendpoints = Array.from(templateSet).map(id => `${process.env.REACT_APP_PUBLIC_API_URL}/template/${id}`);
+    const responses = await axios.all(apiendpoints.map((endpoint) => axios.get(endpoint, addAuthorizationRequestConfig({}))));
+    return templateIds.map(id => {
+        return responses.filter(response => response.data.id === parseInt(id))[0].data
     });
-    return filtered
 }
 
 /**
