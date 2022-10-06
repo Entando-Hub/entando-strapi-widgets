@@ -116,12 +116,23 @@ function updateFTLTemplate() {
             injectResource "$resource" "$ftlName"
         done
 
-        # For every CSS file add a script reference in the widget FTL
+        # For every CSS file add a script reference in the widget FTL and update the static media folder url
+        # and update the static media folder url to the bundle static media in order to avoid some 404 errors on load
         for csspath in "$dir"/resources/static/css/*.css;
         do
 
           # This moves the referenced file to the top level bundle/resources/static dir for correct processing when loaded
           cssfile=$(basename "$csspath")
+
+          local originalStaticMedia="url(/static/media/"
+          local staticMediaBundle="src: url(/$bundleCode/static/media/"
+          echo ""
+          echo "> Updating micro-frontend static media path in $cssfile"
+          echo "> original static media path: $originalStaticMedia"
+          echo "> bundle static media path: $staticMediaBundle"
+          echo "> css file path: $dir/resources/static/css/$cssfile"
+          sedReplace "s|$originalStaticMedia|$staticMediaBundle|g" "$dir/resources/static/css/$cssfile"
+          echo "CSS static media folder updated"
 
           cp "$dir/resources/static/css/$cssfile" bundle/resources/static/css/
           resource="<link href=\"<@wp.resourceURL />${bundleCode}/static/css/${cssfile}\" rel=\"stylesheet\">"
