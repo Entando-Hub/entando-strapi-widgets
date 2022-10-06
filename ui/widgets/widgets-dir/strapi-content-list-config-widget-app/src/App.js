@@ -150,7 +150,12 @@ class App extends Component {
                                             setQueryTerm={this.setQueryTerm}
                                             setFieldSearchBy={this.setFieldSearchBy}
                                             searchText={this.state.searchText}
-                                            selectedCollectionTypeValue={{ label: this.state.selectedCollectionType, value: this.state.selectedContentName }}
+                                            selectedCollectionTypeValue={{
+                                                label: this.state.selectedCollectionType,
+                                                value: this.state.selectedContentName,
+                                                pluralName: this.state.selectedContentPluralName,
+                                                kind: this.state.selectedContentKind
+                                            }}
                                             selectedContentList={this.state.mappingOfContentTemplate}
                                             colLabel={this.state.colLabel}
                                             isEditable={this.state.isEditable}

@@ -103,7 +103,8 @@ class MultiContentList extends Component {
   }
 
   populateConfigForm = async () => {
-    if (this.props.selectedCollectionTypeValue.value && this.props.selectedCollectionTypeValue.label) {
+    if (this.props.selectedCollectionTypeValue.value && this.props.selectedCollectionTypeValue.label
+      && this.props.selectedCollectionTypeValue.pluralName && this.props.selectedCollectionTypeValue.kind) {
       this.setState({ selectedCollectionType: [this.props.selectedCollectionTypeValue] })
       if (this.props.searchText && this.props.colLabel) {
         this.searchByKey = this.props.colLabel;
@@ -283,8 +284,8 @@ class MultiContentList extends Component {
     this.props.setQueryTerm(this.state.searchQuery);
     this.props.setContentTemplate(this.state.selectedContent.map((el) => ({ ...el, contentId: el.id, templateId: null })))
     this.props.setSelectedContentName(this.state.selectedCollectionType[0].value, this.state.selectedCollectionType[0].label, this.state.searchQuery)
-    this.props.setSelectedContentPluralName(this.state.selectedContentPluralName);
-    this.props.setSelectedContentKind(this.state.selectedContentKind);
+    this.props.setSelectedContentPluralName(this.state.selectedCollectionType[0].pluralName);
+    this.props.setSelectedContentKind(this.state.selectedCollectionType[0].kind);
   }
 
   checkIfSelected = (content) => {
