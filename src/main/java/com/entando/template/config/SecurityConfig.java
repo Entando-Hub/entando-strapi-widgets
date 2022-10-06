@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,6 +19,8 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
 @Configuration
@@ -48,6 +51,19 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new RegisterSessionAuthenticationStrategy(
                 new SessionRegistryImpl());
+    }
+
+    @Profile("development")
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("OPTIONS","GET","POST","PUT");
+            }
+        };
     }
 
     @Override

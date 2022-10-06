@@ -36,7 +36,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * Controller class to perform CRUD for template
- * 
+ *
  * @author akhilesh
  *
  */
@@ -51,7 +51,6 @@ public class EntTemplateController {
 
 	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
 	@GetMapping("/")
-	@CrossOrigin
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public List<TemplateResponseView> getTemplates(@RequestParam(required = false) String collectionType) {
 		if(Optional.ofNullable(collectionType).isPresent()) {
@@ -79,7 +78,6 @@ public class EntTemplateController {
 
 	@Operation(summary = "Get the template details by id", description = "Private api, authentication required.")
 	@GetMapping("/{templateId}")
-	@CrossOrigin
 	public ResponseEntity<TemplateResponseView> getTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to get EntTemplate Id: {}", templateId);
 		Optional<EntTemplate> entTemplateOptional = entTemplateService.getTemplate(templateId);
