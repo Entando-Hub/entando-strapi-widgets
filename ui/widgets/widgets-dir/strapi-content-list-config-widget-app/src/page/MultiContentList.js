@@ -103,7 +103,8 @@ class MultiContentList extends Component {
   }
 
   populateConfigForm = async () => {
-    if (this.props.selectedCollectionTypeValue.value && this.props.selectedCollectionTypeValue.label) {
+    if (this.props.selectedCollectionTypeValue.value && this.props.selectedCollectionTypeValue.label
+      && this.props.selectedCollectionTypeValue.pluralName && this.props.selectedCollectionTypeValue.kind) {
       this.setState({ selectedCollectionType: [this.props.selectedCollectionTypeValue] })
       if (this.props.searchText && this.props.colLabel) {
         this.searchByKey = this.props.colLabel;
@@ -144,7 +145,7 @@ class MultiContentList extends Component {
   async setCollectionTypeState() {
     const { data: collectionTypeData } = await getCollectionTypes();
     const collectionTypeApiData = this.filterUidByApiPrefix(collectionTypeData);
-    this.setState({ collectionType: collectionTypeApiData.map(el => ({ label: el.info.displayName, value: el.info.singularName })) });
+    this.setState({ collectionType: collectionTypeApiData.map(el => ({ label: el.info.displayName, value: el.info.singularName, pluralName: el.info.pluralName, kind: el.kind })) });
   }
 
   filterUidByApiPrefix = (collectionTypeData) => {
@@ -168,7 +169,13 @@ class MultiContentList extends Component {
     this.props.setFieldSearchBy('');
     this.setState({ contents: [], selectedContent: [] });
     const collType = collectionType[0]
-    this.setState({ selectedCollectionType: collectionType, searchQuery: '', stowSearchQueryTillSubmit: '' })
+    this.setState({
+      selectedCollectionType: collectionType,
+      selectedContentPluralName: collType?.pluralName,
+      selectedContentKind: collType?.kind,
+      searchQuery: '',
+      stowSearchQueryTillSubmit: ''
+    })
     if (collType && collType.value) {
       await this.getContentsByCollectionType(collType.value)
     }
@@ -277,6 +284,8 @@ class MultiContentList extends Component {
     this.props.setQueryTerm(this.state.searchQuery);
     this.props.setContentTemplate(this.state.selectedContent.map((el) => ({ ...el, contentId: el.id, templateId: null })))
     this.props.setSelectedContentName(this.state.selectedCollectionType[0].value, this.state.selectedCollectionType[0].label, this.state.searchQuery)
+    this.props.setSelectedContentPluralName(this.state.selectedCollectionType[0].pluralName);
+    this.props.setSelectedContentKind(this.state.selectedCollectionType[0].kind);
   }
 
   checkIfSelected = (content) => {

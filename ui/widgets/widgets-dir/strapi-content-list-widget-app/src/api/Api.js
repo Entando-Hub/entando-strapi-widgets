@@ -4,10 +4,6 @@ import { STRAPI_BASE_URL_KEY } from '../helper/Constant';
 const apiEndPoint = `${process.env.REACT_APP_PUBLIC_API_URL}/template/searchby/`;
 const EntKcToken = 'EntKcToken';
 
-const STRAPI_TOKEN = {
-    'Authorization': `Bearer ${process.env.REACT_APP_LOCAL_STRAPI_TOKEN}`
-}
-
 export const getTemplate = async (searchby = 'code', searchTerm) => {
     return await axios.get(`${apiEndPoint}${searchby}/${searchTerm}`,addAuthorizationRequestConfig({}))
 }
@@ -28,37 +24,48 @@ export const getTemplateById = async (templateId) => {
  * @returns
  */
 export const getTemplates = async (templateIds) => {
-    const { data: templateData } = await axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/template/`, addAuthorizationRequestConfig({}));
-    const filtered = templateData.filter(temp => {
-        return templateIds.indexOf(temp.id + "") > -1
+    const templateSet = new Set(templateIds);
+    const apiendpoints = Array.from(templateSet).map(id => `${process.env.REACT_APP_PUBLIC_API_URL}/template/${id}`);
+    const responses = await axios.all(apiendpoints.map((endpoint) => axios.get(endpoint, addAuthorizationRequestConfig({}))));
+    return templateIds.map(id => {
+        return responses.filter(response => response.data.id === parseInt(id))[0].data
     });
-    return filtered
 }
 
 /**
  * getContentById Search Content By Id.
- * @param {*} contentType
+ * @param {*} contentName
  * @param {*} contentId
  * @returns
  */
  export const getContentById = async (contentName, contentId) => {
     if (!contentName || !contentId) console.error(contentName, contentId);
-    const url = `${await fetchStrapiBaseUrl()}/content-manager/collection-types/api::${contentName}.${contentName}/${contentId}`;
-    const { data } = await axios.get(url, addAuthorizationRequestConfig({}, EntKcToken))
+    const url = `${await fetchStrapiBaseUrl()}/api/${contentName}/${contentId}?populate=*`;
+    const { data } = await axios.get(url, addAuthorizationRequestConfig({}, EntKcToken));
+    return data;
+}
 
+/**
+ * getSingleContent Return single type content
+ * @param {*} contentName 
+ * @returns 
+ */
+ export const getSingleTypeContent = async (contentName) => {
+    const url = `${await fetchStrapiBaseUrl()}/api/${contentName}?populate=*`;
+    const { data } = await axios.get(url, addAuthorizationRequestConfig({}, 'EntKcToken'));
     return data;
 }
 
 /**
  * getContents get all contents.
- * @param {*} contentType
- * @param {*} contentId
+ * @param {*} contentName
+ * @param {*} contentIds
  * @returns
  */
 export const getContents = async (contentName, contentIds) => {
     if (!contentName && !contentIds.length) console.error(contentName);
     const strapiUrl = await fetchStrapiBaseUrl();
-    const apiendpoints = contentIds.map(el => `${strapiUrl}/content-manager/collection-types/api::${contentName}.${contentName}/${el}`);
+    const apiendpoints = contentIds.map(el => `${strapiUrl}/api/${contentName}/${el}?populate=*`);
     const data = await axios.all(apiendpoints.map((endpoint) => axios.get(endpoint, addAuthorizationRequestConfig({}, EntKcToken))));
     return data.map((item) => {
         return item.data;
@@ -95,9 +102,11 @@ const getDefaultOptions = (defaultBearer) => {
     const token = getKeycloakToken()
     if (!token) {
         //Below if condition is to run the strapi API in local
-        if (defaultBearer === EntKcToken) {
+        if (defaultBearer === EntKcToken && process.env.REACT_APP_LOCAL_STRAPI_TOKEN) {
             return {
-                headers: STRAPI_TOKEN
+                headers: {
+                    'Authorization': `Bearer ${process.env.REACT_APP_LOCAL_STRAPI_TOKEN}`
+                }
             }
         } else {
             return {}
