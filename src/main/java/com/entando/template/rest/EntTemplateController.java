@@ -49,7 +49,7 @@ public class EntTemplateController {
 	@Autowired
 	private EntTemplateService entTemplateService;
 
-	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
+	@Operation(summary = "Get all the templates")
 	@GetMapping("/")
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public List<TemplateResponseView> getTemplates(@RequestParam(required = false) String collectionType) {
@@ -62,7 +62,7 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Get all the templates", description = "Private api, authentication required.")
+	@Operation(summary = "Get paged templates")
 	@GetMapping("/paged")
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public PagedContent<TemplateResponseView, EntTemplate> getFilteredTemplates(
@@ -76,7 +76,7 @@ public class EntTemplateController {
 		return pagedContent;
 	}
 
-	@Operation(summary = "Get the template details by id", description = "Private api, authentication required.")
+	@Operation(summary = "Get a template details by templateId")
 	@GetMapping("/{templateId}")
 	public ResponseEntity<TemplateResponseView> getTemplate(@PathVariable Long templateId) {
 		logger.debug("REST request to get EntTemplate Id: {}", templateId);
@@ -89,7 +89,7 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Create a new template", description = "Private api, authentication required.")
+	@Operation(summary = "Create a new template")
 	@PostMapping("/")
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<TemplateResponseView> createEntTemplate(@Valid @RequestBody TemplateRequestView templateReqView) {
@@ -102,7 +102,7 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Update a template", description = "Private api, authentication required.")
+	@Operation(summary = "Update a template by templateId")
 	@PutMapping("/{templateId}")
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<TemplateResponseView> updateTemplate(@Valid @RequestBody TemplateRequestView reqView, @PathVariable Long templateId) {
@@ -123,7 +123,7 @@ public class EntTemplateController {
 		}
 	}
 
-	@Operation(summary = "Delete a template", description = "Private api, authentication required.")
+	@Operation(summary = "Delete a template by templateId")
 	@DeleteMapping("/{templateId}")
 	@RolesAllowed({ ApplicationConstants.ROLE_STRAPI_USER })
 	public ResponseEntity<String> deleteEntTemplate(@PathVariable Long templateId) {
