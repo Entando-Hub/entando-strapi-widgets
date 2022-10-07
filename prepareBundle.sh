@@ -125,7 +125,7 @@ function updateFTLTemplate() {
           cssfile=$(basename "$csspath")
 
           local originalStaticMedia="url(/static/media/"
-          local staticMediaBundle="url(/$bundleCode/static/media/"
+          local staticMediaBundle="url(/entando-de-app/cmsresources/$bundleCode/static/media/"
           echo ""
           echo "> Updating micro-frontend static media path in $cssfile"
           echo "> original static media path: $originalStaticMedia"
